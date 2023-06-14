@@ -27,12 +27,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'category_name' => 'required|unique:categories|max:255',
+            'category_name' => 'required|unique:categories|max:201',
             ]);
             
-            $category = new Category;
-            $category->category_name = $request->category_name;
-            $category->save();
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->save();
     }
 
     /**
