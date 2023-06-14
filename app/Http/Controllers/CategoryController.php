@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -12,8 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categoryes = Category::all();
-        return view('categoryes.index', compact('categoryes'));
+        $categories = Category::all();
+        return response()->json($categories);
     }
 
     /**
@@ -21,15 +22,17 @@ class CategoryController extends Controller
      */
     public function create()
     {   
-        return view('categoryes.create');
+        
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:3'
-        ]);   
-        Category::create($request->all());
-        return redirect()->route('categoryes.index')->with('success','Category created successfully.');
+        $validateData = $request->validate([
+            'category_name' => 'required|unique:categories|max:255',
+            ]);
+            
+            $category = new Category;
+            $category->category_name = $request->category_name;
+            $category->save();
     }
 
     /**
@@ -37,8 +40,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::find($id);
-        return view('categoryes.show', with('category', $category));
+        $category = DB::table('categories')->where('id', $id)->first();
+        return response()->json($category);
     }
 
     /**
@@ -47,14 +50,9 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'name' => 'required',
-        ]);
-
-        $category = Category::find($id);
-        $category->update($request->all());
-
-        return redirect()->route('categoryes.index')->with('success','Category updated successfully');
+        $data = array();
+        $data['category_name'] = $request->category_name;
+        $user = DB::table('categories')->where('id', $id)->update($data);
     }
 
     /**
@@ -63,10 +61,6 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        $category = Category::find($id);
-        $category->delete();
-
-       return redirect()->route('categoryes.index')
-                       ->with('success','category deleted successfully');
+        DB::table('categories')->where('id', $id)->delete();
     }
 }
