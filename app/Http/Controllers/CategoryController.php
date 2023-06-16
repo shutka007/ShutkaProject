@@ -20,10 +20,6 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function create()
-    {   
-        
-    }
     public function store(Request $request)
     {
         $validateData = $request->validate([

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    public function phone()
+    public function Category()
     {
-        return $this->belongsTo(Category::class, 'foreign_key');
+        return $this->belongsTo(Category::class);
     }
 }
