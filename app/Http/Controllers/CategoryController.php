@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $category = new Category;
         $category->category_name = $request->category_name;
         $category->save();
-        return 200;
+        //return 200
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
         $data = array();
         $data['category_name'] = $request->category_name;
         $user = DB::table('categories')->where('id', $id)->update($data);
-        return 200;
+        //return 200;
     }
 
     /**
@@ -64,6 +64,6 @@ class CategoryController extends Controller
     {
         //
         DB::table('categories')->where('id', $id)->delete();
-        return 200;
+        //return 200;
     }
 }
