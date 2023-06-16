@@ -12,6 +12,11 @@ class Category extends Model
 
     use SoftDeletes;
 
+    public function Product()
+    {
+        return $this->haseOne(Product::class);
+    }
+
     protected $fillable = [
         'category_name'
     ];
