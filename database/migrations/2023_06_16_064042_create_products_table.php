@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->int('price');
-            $table->int('category_id');
+            $table->integer('price');
+            $table->integer('categories_id');
             $table->softDeletes();
-            $table->foreign('category_id')
+            $table->foreign('categories_id')
     	    ->references('id')
-    	    ->on('category');
+    	    ->on('categories');
             
             $table->timestamps();
         });

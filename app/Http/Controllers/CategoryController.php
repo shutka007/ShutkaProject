@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->first();
+        $category = DB::table('categories')->where('id', $id)->first(); //category find id
         return response()->json($category);
     }
 
