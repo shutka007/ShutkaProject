@@ -16,11 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('price');
-            $table->integer('categories_id');
             $table->softDeletes();
-            $table->foreign('categories_id')
-    	    ->references('id')
-    	    ->on('categories');
+            $table->foreignId('categories_id')->constrained();
             
             $table->timestamps();
         });
