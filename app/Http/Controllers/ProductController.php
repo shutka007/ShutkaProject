@@ -29,7 +29,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->product_name = $request->product_name;
         $product->save();   
-        //return 200
+        return 201;
     }
 
     /**
@@ -50,7 +50,7 @@ class ProductController extends Controller
         $data = array();
         $data['product_name'] = $request->product_name;
         $user = DB::table('products')->where('id', $id)->update($data);
-        //return 200;
+        return 200;
     }
 
     /**
@@ -60,6 +60,6 @@ class ProductController extends Controller
     {
         //
         DB::table('products')->where('id', $id)->delete();
-        //return 200;
+        return 200;
     }
 }
