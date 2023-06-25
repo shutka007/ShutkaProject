@@ -28,8 +28,7 @@ class CategoryController extends Controller
             
         $category = new Category;
         $category->category_name = $request->category_name;
-        $category->save();
-        return 201;
+        return $category->save();
     }
 
     /**
@@ -59,7 +58,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        DB::table('categories')->where('id', $id)->delete();
+        Category::find($id)->delete();
         return 200;
     }
 }

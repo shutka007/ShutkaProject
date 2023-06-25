@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return response()->json($products);
+        return response()->json($products); //товар через категории
     }
 
     /**
@@ -24,6 +24,7 @@ class ProductController extends Controller
     {
         $validateData = $request->validate([
             'product_name' => 'required|unique:products|max:201',
+            'category' => 'required|'
             ]);
             
         $product = new Product;
@@ -59,7 +60,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
-        DB::table('products')->where('id', $id)->delete();
+        Product::find($id)->delete();
         return 200;
     }
 }
