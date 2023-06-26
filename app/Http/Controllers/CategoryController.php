@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->first(); //category find id
+        $category = Category::find($id); //category find id
         return response()->json($category);
     }
 
@@ -48,7 +48,7 @@ class CategoryController extends Controller
         //
         $data = array();
         $data['category_name'] = $request->category_name;
-        $user = DB::table('categories')->where('id', $id)->update($data);//refactoring
+        $user = Category::find($id)->update($data);//refactoring
         return 200;
     }
 

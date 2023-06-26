@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $validateData = $request->validate([
             'product_name' => 'required|unique:products|max:201',
-            'category' => 'required|'
+            'category' => 'required|exists:categories,id'
             ]);
             
         $product = new Product;
@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = DB::table('products')->where('id', $id)->first(); //category find id
+        $product = Product::find($id); //category find id
         return response()->json($product);
     }
 
@@ -50,7 +50,7 @@ class ProductController extends Controller
         //
         $data = array();
         $data['product_name'] = $request->product_name;
-        $user = DB::table('products')->where('id', $id)->update($data);
+        $user = Product::find($id)->update($data);
         return 200;
     }
 
