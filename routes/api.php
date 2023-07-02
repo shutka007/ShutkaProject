@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('categories/(id)/restore', [CategoryController::class, 'restore']);
     Route::patch('categries/{id}/update', [CategoryController::class, 'update']);
     Route::delete('categories', [CategoryController::class, 'index']);
-    Route::get('categories', [CategoryController::class, 'index']);
+    Route::get('categories', [CategoryController::class, 'show']);
     Route::get('categories/{id}', [CategoryController::class, 'show']);
 
     Route::post('products', [ProductController::class, 'store']);

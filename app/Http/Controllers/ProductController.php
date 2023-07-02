@@ -11,9 +11,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        $products = Product::all();
+        $products = Product::where('categories_id', $id);
         return response()->json($products); //товар через категории
     }
 
@@ -23,12 +23,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'product_name' => 'required|unique:products|max:201',
-            'category' => 'required|exists:categories,id'
+            'name' => 'required|unique:products|max:201',
+            'categories_id' => 'required|exists:categories,id',
+            'description'=> 'required',
+            'price' => 'required'
             ]);
             
         $product = new Product;
-        $product->product_name = $request->product_name;
+        $product->name = $request->name;
+        $product->categories_id = $request->categories_id;
+        $product->description = $request->description;
+        $product->price = $request->price;
         $product->save();   
         return 201;
     }
@@ -49,7 +54,7 @@ class ProductController extends Controller
     {
         //
         $data = array();
-        $data['product_name'] = $request->product_name;
+        $data['name'] = $request->name;
         $user = Product::find($id)->update($data);
         return 200;
     }
