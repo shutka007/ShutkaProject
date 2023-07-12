@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Facades\DummyJsonFacade;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,8 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('categories/(id)/restore', [CategoryController::class, 'restore']);
     Route::patch('categries/{id}/update', [CategoryController::class, 'update']);
     Route::delete('categories', [CategoryController::class, 'index']);
-    Route::get('categories', [CategoryController::class, 'show']);
+    Route::get('categories', [CategoryController::class, 'index']);
     Route::get('categories/{id}', [CategoryController::class, 'show']);
+    Route::post('getCategories', [CategoryController::class, 'getCategories']);
 
     Route::post('products', [ProductController::class, 'store']);
     Route::post('products/(id)/restore', [ProductController::class, 'restore']);

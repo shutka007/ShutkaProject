@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Facades\DummyJson;
 
 class CategoryController extends Controller
 {
@@ -60,5 +61,10 @@ class CategoryController extends Controller
         //
         Category::find($id)->delete();
         return 200;
+    }
+
+    public function getCategories()
+    {
+        DummyJson::getCategories();
     }
 }
