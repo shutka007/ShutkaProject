@@ -23,7 +23,7 @@ class DummyJsonService
             foreach ($categories as $category) {
                 $categories1 = new Category;
                 $categories1->category_name = $category;
-                return $categories1->save();
+                $categories1->save();
             }
         }
     }
