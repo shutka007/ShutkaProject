@@ -65,6 +65,12 @@ class CategoryController extends Controller
 
     public function getCategories()
     {
-        DummyJson::getCategories();
+        $categories = DummyJson::getCategories();
+        foreach ($categories as $category) {
+            Category::updateOrCreate([
+                'category_name' => $category
+            ]);
+        }
+        return response()->json();
     }
 }

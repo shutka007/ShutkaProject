@@ -18,13 +18,13 @@ class DummyJsonService
         $response = $this->client->request('GET', 'https://dummyjson.com/products/categories');
 
         if ($response->getStatusCode() == 200) {
-            $categories = json_decode($response->getBody()->getContents());
+            return $categories = json_decode($response->getBody()->getContents());
 
-            foreach ($categories as $category) {
+            /*foreach ($categories as $category) {
                 $categories1 = new Category;
                 $categories1->category_name = $category;
                 $categories1->save();
-            }
+            }*/
         }
     }
 }
